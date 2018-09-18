@@ -5,6 +5,14 @@ class Api::ContactsController < ApplicationController
     if current_user
       # @contacts = Contact.where(user_id: current_user.id) or:
       @contacts = current_user.contacts
+
+      group_name = params[:group]
+
+      if group_name
+        group = Group.find_by(name: group_name)
+        @contacts = group.contacts.where(user_id: current_user.id)
+      end
+
       render 'index.json.jbuilder'
     else
       render json: []

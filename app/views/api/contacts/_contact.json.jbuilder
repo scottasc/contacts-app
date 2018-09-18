@@ -14,4 +14,8 @@ json.formatted do
   json.friendly_updated_at contact.friendly_updated_at
 end
 
+json.groups do
+  json.array! contact.group, partial: "api/groups/group", as: :group
+end
+
 # json.current_user current_user
